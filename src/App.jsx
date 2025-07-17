@@ -5,7 +5,7 @@ import "./App.css";
 import CookieBot from "react-cookiebot";
 
 function App() {
-  const COOKIEBOT_ID = "";
+  const COOKIEBOT_ID = import.meta.env.VITE_COOKIEBOT_ID;
   const [count, setCount] = useState(0);
   // const [hasCookieBot, setHasCookieBot] = useState(undefined);
 
