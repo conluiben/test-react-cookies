@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "klaro": "^0.7.21",
     "react": "^19.1.0",
     "react-cookiebot": "^1.0.10",
     "react-dom": "^19.1.0"

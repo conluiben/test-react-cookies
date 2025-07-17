@@ -1,17 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import CookieBot from "react-cookiebot";
+import * as klaro from "klaro";
+// import "klaro/dist/klaro.css";
+
+// const COOKIEBOT_ID = import.meta.env.VITE_COOKIEBOT_ID;
+
+const klaroConfig = {
+  elementID: "klaro",
+  privacyPolicy: "/privacy.html",
+  default: false,
+  lang: "en",
+  translations: {
+    en: {
+      consentModal: {
+        title: "Cookies & Services",
+        description: "Here you can decide what cookies are used on this site.",
+      },
+    },
+  },
+  apps: [
+    {
+      name: "google-analytics",
+      title: "Google Analytics",
+      purposes: ["statistics"],
+      cookies: [/^_ga/, /^_gid/],
+      default: false,
+    },
+  ],
+};
 
 function App() {
-  const COOKIEBOT_ID = import.meta.env.VITE_COOKIEBOT_ID;
   const [count, setCount] = useState(0);
   // const [hasCookieBot, setHasCookieBot] = useState(undefined);
+  // useEffect(() => {
+  //   // Inject Klaro config into global scope
+  //   window.klaroConfig = klaroConfig;
 
+  //   // Dynamically load Klaro script (from CDN or locally)
+  //   const script = document.createElement("script");
+  //   script.src = "https://cdn.kiprotect.com/klaro/latest/klaro.js";
+  //   script.defer = true;
+  //   script.setAttribute("data-config", "klaroConfig");
+
+  //   document.head.appendChild(script);
+  // }, []);
+  useEffect(() => {
+    klaro.setup(klaroConfig);
+    window.klaro = klaro; // for console debugging or manual access
+  }, []);
   return (
     <>
-      <CookieBot domainGroupId={COOKIEBOT_ID} />
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
